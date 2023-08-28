@@ -1,6 +1,7 @@
 import {
   Button,
   HStack,
+  Heading,
   Image,
   List,
   ListItem,
@@ -22,28 +23,35 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   if (isLoading) return <Spinner />;
 
   return (
-    <List>
-      {data.map((genre) => (
-        <ListItem key={genre.id} paddingY="5px">
-          <HStack>
-            <Image
-              boxSize="32px"
-              borderRadius={8}
-              src={getCroppedImage(genre.image_background)}
-            />
-            <Button
-              variant="link"
-              textDecoration="none"
-              onClick={() => onSelectGenre(genre)}
-              fontSize="lg"
-              fontWeight={selectedGenre?.id === genre.id ? "bold" : "normal"}
-            >
-              {genre.name === "Massively Multiplayer" ? "MMO" : genre.name}
-            </Button>
-          </HStack>
-        </ListItem>
-      ))}
-    </List>
+    <>
+      <Heading marginBottom={3} fontSize="2xl">
+        Genres
+      </Heading>
+      <List>
+        {data.map((genre) => (
+          <ListItem key={genre.id} paddingY="5px">
+            <HStack>
+              <Image
+                objectFit="cover"
+                boxSize="32px"
+                borderRadius={8}
+                src={getCroppedImage(genre.image_background)}
+              />
+              <Button
+                whiteSpace="normal"
+                textAlign="left"
+                variant="link"
+                onClick={() => onSelectGenre(genre)}
+                fontSize="lg"
+                fontWeight={selectedGenre?.id === genre.id ? "bold" : "normal"}
+              >
+                {genre.name === "Massively Multiplayer" ? "MMO" : genre.name}
+              </Button>
+            </HStack>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
 
